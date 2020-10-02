@@ -699,3 +699,20 @@ console.warn: services.settings: main/cfr sync interrupted by shutdown
 console.warn: services.settings: main/partitioning-exempt-urls sync interrupted by shutdown
 console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
 console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 351))
+1601637020901	geckodriver	INFO	Listening on 127.0.0.1:39055
+1601637021914	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileR65n4Z"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1601637023891	Marionette	INFO	Listening on port 41249
+1601637023973	Marionette	WARN	TLS certificate errors will be ignored for this session
+1601637024147	Marionette	INFO	Stopped listening on port 41249
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 351))
+1601637046715	geckodriver	INFO	Listening on 127.0.0.1:49495
+1601637046718	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileGNz0JV"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1601637048868	Marionette	INFO	Listening on port 33247
+1601637048924	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/AutoCompleteChild.jsm, line 235: Error: Invalid autocomplete selectedIndex
+1601637049265	Marionette	INFO	Stopped listening on port 33247
+console.error: Region.jsm: "Error fetching region" (new TypeError("NetworkError when attempting to fetch resource.", ""))
+console.error: Region.jsm: "Failed to fetch region" (new Error("NO_RESULT", "resource://gre/modules/Region.jsm", 351))
