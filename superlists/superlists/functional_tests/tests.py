@@ -36,12 +36,14 @@ class NewVisitorTest(LiveServerTestCase):
             inputbox.get_attribute("placeholder"),
             "Enter a to-do item"
             )
+        
         inputbox.send_keys("Buy peacock feathers")
+        
         inputbox.send_keys(Keys.ENTER)
-        edith_list_url = self.browser.current_url
-        self.assertRegex(edith_list_url, "/list/.+")
-        #with(tool.wait_page_load(self.browser)):
         time.sleep(1)
+        edith_list_url = self.browser.current_url
+        self.assertRegex(edith_list_url, "/lists/.+")
+        #with(tool.wait_page_load(self.browser)):
         self.check_for_row_in_list_table("1: Buy peacock feathers")
         
         #self.browser.refresh()
@@ -68,11 +70,12 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotIn("Buy peacock feathers", page_text)
         self.assertNotIn("make a fly", page_text)
         
+        
         #Francis 輸入一個新項目，做出一個新的清單
         inputbox = self.browser.find_element_by_id("id_new_item")
         inputbox.send_keys("Buy milk")
         inputbox.send_keys(Keys.ENTER)
-        
+        time.sleep(1)
         #Francis取捯他自己獨一無二的清單
         francis_list_url = self.browser.current_url
         self.assertRegex(francis_list_url, "/lists/+.")
