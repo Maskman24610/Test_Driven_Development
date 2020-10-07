@@ -15,6 +15,8 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+#為了解決 improperlyConfFigured 的bug
+#os.environ.setdefault("DJANGO_SETTINGS_MODULE", "HeatEnergy.settings")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/

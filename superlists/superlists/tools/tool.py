@@ -3,7 +3,7 @@ from selenium.webdriver.support.expected_conditions import staleness_of
 
 
 class wait_page_load:
-    def __init__(self, browser, timeout=5):
+    def __init__(self, browser, timeout=60):
         self.browser = browser
         self.timeout = timeout
         
