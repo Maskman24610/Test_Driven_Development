@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import  Keys
 #import unittest
 #from tools import tool
+from selenium.common.exceptions import WebDriverException
 from django.test.testcases import LiveServerTestCase
 import time
 
@@ -13,15 +14,29 @@ class NewVisitorTest(LiveServerTestCase):
         
     def tearDown(self):
         self.browser.quit()
-
+         
+    def wait_for_row_in_list_table(self, row_text):
+        MAX_WAIT = 10
+        start_time = time.time()
+        while True:  
+            try:
+                table = self.browser.find_element_by_id('id_list_table')  
+                rows = table.find_elements_by_tag_name('tr')
+                time.sleep(1)
+                self.assertIn(row_text, [row.text for row in rows])
+                return  
+            except (AssertionError, WebDriverException) as e:  
+                if time.time() - start_time > MAX_WAIT:  
+                    raise e 
+                time.sleep(0.5)  
     def check_for_row_in_list_table(self, row_text):
         #self.browser.refresh()
         #self.browser.get("http://localhost:8000")
         #with(tool.wait_page_load(self.browser)):
-            table = self.browser.find_element_by_id("id_list_table")
-            rows = table.find_elements_by_tag_name("tr")
+        table = self.browser.find_element_by_id("id_list_table")
+        rows = table.find_elements_by_tag_name("tr")
         #with(tool.wait_page_load(self.browser)):
-            self.assertIn(row_text, [row.text for row in rows])
+        self.assertIn(row_text, [row.text for row in rows])
         
     def test_can_start_a_list_and_retrieve_it_later(self):
         self.browser.get(self.live_server_url)
@@ -38,10 +53,12 @@ class NewVisitorTest(LiveServerTestCase):
             )
         
         inputbox.send_keys("Buy peacock feathers")
-        
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
+        
         edith_list_url = self.browser.current_url
+        #self.wait_for_row_in_list_table("1: Buy peacock feathers")
+        
         self.assertRegex(edith_list_url, "/lists/.+")
         #with(tool.wait_page_load(self.browser)):
         self.check_for_row_in_list_table("1: Buy peacock feathers")
@@ -52,9 +69,10 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox = self.browser.find_element_by_id("id_new_item")
         inputbox.send_keys("Use peacock feathers to make a fly")
         inputbox.send_keys(Keys.ENTER)
+        time.sleep(1)
+        
         #網頁更新，此時他的清單有這兩項
         #with(tool.wait_page_load(self.browser)):
-        time.sleep(1)
         self.check_for_row_in_list_table("1: Buy peacock feathers")
         self.check_for_row_in_list_table("2: Use peacock feathers to make a fly")
         
@@ -76,6 +94,7 @@ class NewVisitorTest(LiveServerTestCase):
         inputbox.send_keys("Buy milk")
         inputbox.send_keys(Keys.ENTER)
         time.sleep(1)
+        
         #Francis取捯他自己獨一無二的清單
         francis_list_url = self.browser.current_url
         self.assertRegex(francis_list_url, "/lists/+.")
