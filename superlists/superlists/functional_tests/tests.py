@@ -3,10 +3,12 @@ from selenium.webdriver.common.keys import  Keys
 #import unittest
 #from tools import tool
 from selenium.common.exceptions import WebDriverException
-from django.test.testcases import LiveServerTestCase
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 import time
 
-class NewVisitorTest(LiveServerTestCase):
+#因為LiveServerTestCase無法自動找到靜態檔案，但是StaticLiveServerTestCase可以
+#所以改為使用StaticLiveServerTestCase
+class NewVisitorTest(StaticLiveServerTestCase):
     
     def setUp(self):
         self.browser = webdriver.Firefox(executable_path="/home/joseph/git/Test_Driven_Development/superlists/geckodriver")
